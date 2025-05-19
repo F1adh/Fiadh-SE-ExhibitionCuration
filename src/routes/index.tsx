@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -7,33 +6,31 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <div className="text-center">
-      <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
+    <main className="grid grid-rows-3 w-screen min-h-screen ">
+      <section className=" w-full min-h-[30vh] relative">
         <img
-          src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-          alt="logo"
+          src="/HomeImg.jpg"
+          className="w-full h-full object-cover"
+          alt="Exhibit"
         />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
-    </div>
+
+        <div className="absolute inset-0 bg-[rgb(77,204,189,0.75)] bg-opacity-10"></div>
+
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div>
+            <h2 className="text-2xl text-MintGreen">For the Curious</h2>
+            <h3 className="text-xs text-MintGreen">
+              Explore Our Unique Exhibits
+            </h3>
+          </div>
+        </div>
+      </section>
+      <section className="bg-SpaceCadet w-full">
+        <h2>Our Picks</h2>
+      </section>
+      <section className="bg-SpaceCadet w-full">
+        <h2>Latest Blogs</h2>
+      </section>
+    </main>
   )
 }
