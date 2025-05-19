@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@theme{
+  --color-MintGreen: #D6FFF6;
+  --color-RoseQuartz: #A499BE;
+  --color-Turquoise: #4DCCBD;
+  --color-Coyote: #7A542E;
+  --color-SpaceCadet: #2A2E45;
+}
+
 body {
   @apply m-0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
