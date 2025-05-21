@@ -10,7 +10,7 @@ const Exhibitioncard: React.FC<Props> = ({ objectID }) => {
     const response = await axios.get(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`,
     )
-    console.log(response.data)
+  
     return response.data
   }
 
@@ -23,7 +23,7 @@ const Exhibitioncard: React.FC<Props> = ({ objectID }) => {
   if (error) return <div>Error loading exhibit.</div>
 
   return (
-    <li className="max-h-20 flex flex-row">
+    <li className="max-h-20 flex flex-row bg-Turquoise  border-Coyote border-b-4">
       <img
         src={data.primaryImageSmall || '/imageplaceholder.png'}
         className="max-h-20 max-w-20 object-scale-down"
