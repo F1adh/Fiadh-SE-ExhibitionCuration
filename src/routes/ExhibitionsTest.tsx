@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import axios from 'axios'
+import { useQueries, useQuery } from '@tanstack/react-query'
+
 import { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai'
@@ -8,25 +8,14 @@ import { IconContext } from 'react-icons'
 import Filtertoolbar from '@/components/Filtertoolbar'
 import Exhibitioncardone from '@/components/ExhibitionCardMet'
 
-export const Route = createFileRoute('/Exhibitions')({
+import fetchMetIDs from '@/api/metApi'
+
+import fetchHarvardObjects from '@/api/harvardApi'
+import ExhibitionCardHarvard from '@/components/ExhibitionCardHarvard'
+
+export const Route = createFileRoute('/ExhibitionsTest')({
   component: RouteComponent,
 })
-
-const fetchExhibitIDs = async (search: string): Promise<number[]> => {
-  if (search === '') {
-    const queryResponse = await axios({
-      method: 'get',
-      url: 'https://collectionapi.metmuseum.org/public/collection/v1/objects',
-    })
-    return queryResponse.data.objectIDs
-  } else {
-    const queryResponse = await axios({
-      method: 'get',
-      url: `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${search}`,
-    })
-    return queryResponse.data.objectIDs
-  }
-}
 
 function RouteComponent() {
   const [page, setPage] = useState<number>(0)
@@ -40,46 +29,62 @@ function RouteComponent() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    refetch()
+    metData.refetch()
+    harvardData.refetch()
   }
 
-  const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ['exhibitIDs, search'],
-    queryFn: () => fetchExhibitIDs(search),
+  const [metData, harvardData] = useQueries({
+    queries: [
+      {
+        queryKey: ['metExhibitIDs', search],
+        queryFn: () => fetchMetIDs(search),
+      },
+      {
+        queryKey: ['harvardExhibitIDs', search],
+        queryFn: () => fetchHarvardObjects(search),
+      },
+    ],
   })
 
   useEffect(() => {
-    if (data) {
+    if (Array.isArray(metData.data)) {
       setFilterData(
-        data.filter(
+        metData.data.filter(
           (_, index) =>
             index >= page * objectNumber && index < (page + 1) * objectNumber,
         ),
       )
     }
-  }, [page, data])
+  }, [page, metData.data])
 
   return (
     <main className="flex flex-col w-screen min-h-screen ">
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
-        {isLoading && <div>Loading...</div>}
+        {metData.isLoading && <div>Loading...</div>}
         <ul>
           {filterData &&
             filterData.map((exhibit, index) => {
               return <Exhibitioncardone key={index} objectID={exhibit} />
             })}
+
+          {harvardData.data && (
+            <ExhibitionCardHarvard
+              records={harvardData.data}
+              isLoading={harvardData.isLoading}
+            />
+          )}
         </ul>
       </section>
 
       <section>
-        {data && (
+        {metData.data && (
           <ReactPaginate
             containerClassName={'pagination flex flex-row items-center gap-2'}
             pageClassName={'page-item'}
             activeClassName={'active'}
             onPageChange={(event) => setPage(event.selected)}
-            pageCount={Math.ceil(data.length / objectNumber)}
+            pageCount={Math.ceil(metData.data.length / objectNumber)}
             pageRangeDisplayed={5}
             breakLabel="..."
             previousLabel={

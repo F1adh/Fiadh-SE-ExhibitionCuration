@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as MuseumsImport } from './routes/Museums'
 import { Route as FooterImport } from './routes/Footer'
+import { Route as ExhibitionsTestImport } from './routes/ExhibitionsTest'
 import { Route as ExhibitionsImport } from './routes/Exhibitions'
 import { Route as ContactImport } from './routes/Contact'
 import { Route as CollectionsImport } from './routes/Collections'
@@ -31,6 +32,12 @@ const MuseumsRoute = MuseumsImport.update({
 const FooterRoute = FooterImport.update({
   id: '/Footer',
   path: '/Footer',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExhibitionsTestRoute = ExhibitionsTestImport.update({
+  id: '/ExhibitionsTest',
+  path: '/ExhibitionsTest',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -109,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExhibitionsImport
       parentRoute: typeof rootRoute
     }
+    '/ExhibitionsTest': {
+      id: '/ExhibitionsTest'
+      path: '/ExhibitionsTest'
+      fullPath: '/ExhibitionsTest'
+      preLoaderRoute: typeof ExhibitionsTestImport
+      parentRoute: typeof rootRoute
+    }
     '/Footer': {
       id: '/Footer'
       path: '/Footer'
@@ -141,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/Collections': typeof CollectionsRoute
   '/Contact': typeof ContactRoute
   '/Exhibitions': typeof ExhibitionsRoute
+  '/ExhibitionsTest': typeof ExhibitionsTestRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -152,6 +167,7 @@ export interface FileRoutesByTo {
   '/Collections': typeof CollectionsRoute
   '/Contact': typeof ContactRoute
   '/Exhibitions': typeof ExhibitionsRoute
+  '/ExhibitionsTest': typeof ExhibitionsTestRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -164,6 +180,7 @@ export interface FileRoutesById {
   '/Collections': typeof CollectionsRoute
   '/Contact': typeof ContactRoute
   '/Exhibitions': typeof ExhibitionsRoute
+  '/ExhibitionsTest': typeof ExhibitionsTestRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -177,6 +194,7 @@ export interface FileRouteTypes {
     | '/Collections'
     | '/Contact'
     | '/Exhibitions'
+    | '/ExhibitionsTest'
     | '/Footer'
     | '/Museums'
     | '/demo/tanstack-query'
@@ -187,6 +205,7 @@ export interface FileRouteTypes {
     | '/Collections'
     | '/Contact'
     | '/Exhibitions'
+    | '/ExhibitionsTest'
     | '/Footer'
     | '/Museums'
     | '/demo/tanstack-query'
@@ -197,6 +216,7 @@ export interface FileRouteTypes {
     | '/Collections'
     | '/Contact'
     | '/Exhibitions'
+    | '/ExhibitionsTest'
     | '/Footer'
     | '/Museums'
     | '/demo/tanstack-query'
@@ -209,6 +229,7 @@ export interface RootRouteChildren {
   CollectionsRoute: typeof CollectionsRoute
   ContactRoute: typeof ContactRoute
   ExhibitionsRoute: typeof ExhibitionsRoute
+  ExhibitionsTestRoute: typeof ExhibitionsTestRoute
   FooterRoute: typeof FooterRoute
   MuseumsRoute: typeof MuseumsRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
@@ -220,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsRoute: CollectionsRoute,
   ContactRoute: ContactRoute,
   ExhibitionsRoute: ExhibitionsRoute,
+  ExhibitionsTestRoute: ExhibitionsTestRoute,
   FooterRoute: FooterRoute,
   MuseumsRoute: MuseumsRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
@@ -240,6 +262,7 @@ export const routeTree = rootRoute
         "/Collections",
         "/Contact",
         "/Exhibitions",
+        "/ExhibitionsTest",
         "/Footer",
         "/Museums",
         "/demo/tanstack-query"
@@ -259,6 +282,9 @@ export const routeTree = rootRoute
     },
     "/Exhibitions": {
       "filePath": "Exhibitions.tsx"
+    },
+    "/ExhibitionsTest": {
+      "filePath": "ExhibitionsTest.tsx"
     },
     "/Footer": {
       "filePath": "Footer.tsx"

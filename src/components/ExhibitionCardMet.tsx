@@ -5,7 +5,7 @@ export interface Props {
   objectID: number
 }
 
-const Exhibitioncard: React.FC<Props> = ({ objectID }) => {
+const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
   const fetchExhibit = async () => {
     const response = await axios.get(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`,
@@ -35,4 +35,4 @@ const Exhibitioncard: React.FC<Props> = ({ objectID }) => {
   )
 }
 
-export default Exhibitioncard
+export default Exhibitioncardone
