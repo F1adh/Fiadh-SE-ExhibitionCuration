@@ -31,7 +31,7 @@ const fetchExhibitIDs = async (search: string): Promise<number[]> => {
 function RouteComponent() {
   const [page, setPage] = useState<number>(0)
   const [filterData, setFilterData] = useState<number[]>([])
-  const objectNumber = 5
+  const objectNumber = 10
   const [search, setSearch] = useState<string>('')
 
   const onInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
