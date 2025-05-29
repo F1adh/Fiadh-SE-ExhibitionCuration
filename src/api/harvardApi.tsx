@@ -5,6 +5,8 @@ interface People{
 }
 
 interface ObjectRecord {
+  objectid: number,
+  objectnumber: string,
   primaryimageurl: string,
   title: string,
   people: People[]

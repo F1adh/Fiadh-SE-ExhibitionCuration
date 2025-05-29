@@ -6,6 +6,7 @@ interface People {
 }
 
 interface ObjectRecord {
+  objectid: number
   objectnumber: string
   primaryimageurl: string
   title: string
@@ -41,7 +42,8 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
             />
             <h3>{record.title}</h3>
             <h4>{record.people?.[0]?.name}</h4>
-            <Link to={`/Exhibition/${record.objectnumber}`}>
+            
+            <Link to={`/Exhibition/${record.objectid}`}>
               <button className="btn">View Details</button>
             </Link>
           </li>
