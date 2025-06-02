@@ -21,6 +21,7 @@ import { Route as AboutImport } from './routes/About'
 import { Route as IndexImport } from './routes/index'
 import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
 import { Route as ExhibitionIdImport } from './routes/Exhibition/$id'
+import { Route as CollectionCollectionIdImport } from './routes/Collection/$collectionId'
 
 // Create/Update Routes
 
@@ -84,6 +85,12 @@ const ExhibitionIdRoute = ExhibitionIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CollectionCollectionIdRoute = CollectionCollectionIdImport.update({
+  id: '/Collection/$collectionId',
+  path: '/Collection/$collectionId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -144,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MuseumsImport
       parentRoute: typeof rootRoute
     }
+    '/Collection/$collectionId': {
+      id: '/Collection/$collectionId'
+      path: '/Collection/$collectionId'
+      fullPath: '/Collection/$collectionId'
+      preLoaderRoute: typeof CollectionCollectionIdImport
+      parentRoute: typeof rootRoute
+    }
     '/Exhibition/$id': {
       id: '/Exhibition/$id'
       path: '/Exhibition/$id'
@@ -172,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/ExhibitionsTest': typeof ExhibitionsTestRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
+  '/Collection/$collectionId': typeof CollectionCollectionIdRoute
   '/Exhibition/$id': typeof ExhibitionIdRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
@@ -185,6 +200,7 @@ export interface FileRoutesByTo {
   '/ExhibitionsTest': typeof ExhibitionsTestRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
+  '/Collection/$collectionId': typeof CollectionCollectionIdRoute
   '/Exhibition/$id': typeof ExhibitionIdRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
@@ -199,6 +215,7 @@ export interface FileRoutesById {
   '/ExhibitionsTest': typeof ExhibitionsTestRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
+  '/Collection/$collectionId': typeof CollectionCollectionIdRoute
   '/Exhibition/$id': typeof ExhibitionIdRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
@@ -214,6 +231,7 @@ export interface FileRouteTypes {
     | '/ExhibitionsTest'
     | '/Footer'
     | '/Museums'
+    | '/Collection/$collectionId'
     | '/Exhibition/$id'
     | '/demo/tanstack-query'
   fileRoutesByTo: FileRoutesByTo
@@ -226,6 +244,7 @@ export interface FileRouteTypes {
     | '/ExhibitionsTest'
     | '/Footer'
     | '/Museums'
+    | '/Collection/$collectionId'
     | '/Exhibition/$id'
     | '/demo/tanstack-query'
   id:
@@ -238,6 +257,7 @@ export interface FileRouteTypes {
     | '/ExhibitionsTest'
     | '/Footer'
     | '/Museums'
+    | '/Collection/$collectionId'
     | '/Exhibition/$id'
     | '/demo/tanstack-query'
   fileRoutesById: FileRoutesById
@@ -252,6 +272,7 @@ export interface RootRouteChildren {
   ExhibitionsTestRoute: typeof ExhibitionsTestRoute
   FooterRoute: typeof FooterRoute
   MuseumsRoute: typeof MuseumsRoute
+  CollectionCollectionIdRoute: typeof CollectionCollectionIdRoute
   ExhibitionIdRoute: typeof ExhibitionIdRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
@@ -265,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExhibitionsTestRoute: ExhibitionsTestRoute,
   FooterRoute: FooterRoute,
   MuseumsRoute: MuseumsRoute,
+  CollectionCollectionIdRoute: CollectionCollectionIdRoute,
   ExhibitionIdRoute: ExhibitionIdRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
@@ -287,6 +309,7 @@ export const routeTree = rootRoute
         "/ExhibitionsTest",
         "/Footer",
         "/Museums",
+        "/Collection/$collectionId",
         "/Exhibition/$id",
         "/demo/tanstack-query"
       ]
@@ -314,6 +337,9 @@ export const routeTree = rootRoute
     },
     "/Museums": {
       "filePath": "Museums.tsx"
+    },
+    "/Collection/$collectionId": {
+      "filePath": "Collection/$collectionId.tsx"
     },
     "/Exhibition/$id": {
       "filePath": "Exhibition/$id.tsx"
