@@ -15,7 +15,7 @@ interface Props {
 }
 
 const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal }) => {
-  const [newCollection, setNewCollection] = useState('')
+  
   const [input, setInput] = useState('')
 
   const { data, isLoading, error } = useQuery<Collection[] | null>({
