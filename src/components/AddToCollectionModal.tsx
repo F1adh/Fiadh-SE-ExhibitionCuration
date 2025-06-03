@@ -17,18 +17,13 @@ interface Props {
 const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal }) => {
   
   const [input, setInput] = useState('')
+  
 
   const { data, isLoading, error } = useQuery<Collection[] | null>({
     queryKey: ['collections'],
     queryFn: fetchCollections,
   })
 
-  /*
-  const addCollection = useQuery({
-    queryKey: ['collectionAdd', newCollection],
-    queryFn: () => addToCollections(newCollection),
-  })
-    */
 
   const onInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setInput(e.currentTarget.value)
@@ -39,6 +34,7 @@ const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal }) => {
     const error = await addToCollections(input)
     console.log(error)
     closeModal()
+    setIsSent(true)
     //refetch here
   }
 
@@ -52,27 +48,28 @@ const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal }) => {
 
   return (
     <div>
-      <h4>Choose a Collection:</h4>
-      <ul>
+      <h4 className='text-xl font-semibold mb-4'>Choose a Collection:</h4>
+      <ul className=" overflow-y-auto">
         {data.map((collection) => (
           <li
             key={collection.id}
             onClick={() => addObject(collection.id.toString())}
-            className="cursor-pointer hover:underline"
+            className="cursor-pointer font-bold px-4 py-2 rounded hover:underline transition"
           >
             {collection.collection_name}
           </li>
         ))}
       </ul>
 
-      <h4>Add a collection:</h4>
-      <form onSubmit={onSubmit}>
+      <h4 className='text-lg font-medium mb-2'>Add a collection:</h4>
+      <form onSubmit={onSubmit} className="flex flex-col gap-3">
         <input
           type="text"
           onChange={(e) => onInputChange(e)}
-          className="border-2 border-black"
+          className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="New collection"
         ></input>
-        <button>Submit</button>
+        <button className='bg-RoseQuartz text-black rounded px-4 py-2 hover:bg-MintGreen transition'>Submit</button>
       </form>
     </div>
   )

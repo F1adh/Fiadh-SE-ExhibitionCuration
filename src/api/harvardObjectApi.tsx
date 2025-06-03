@@ -5,7 +5,9 @@ interface People {
 }
 
 interface ObjectRecord {
-  
+  description:string
+  department: string
+  url: string
   primaryimageurl: string
   title: string
   people: People[]
