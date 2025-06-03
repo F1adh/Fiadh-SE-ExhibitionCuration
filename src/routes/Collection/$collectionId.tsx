@@ -27,19 +27,32 @@ function RouteComponent() {
 
 
   return (
-    <section>
-      {objectQueries.map((query, index) => {
-        if (query.isLoading) return <p key={index}>Loading object...</p>
-        if (query.error) return <p key={index}>Error loading object.</p>
-        if (!query.data) return null
+    <section className='p-6 bg-MintGreen min-h-screen'>
+      <h2 className="text-2xl font-semibold mb-6 text-SpaceCadet">Collection Objects</h2>
 
-        return (
-          <article key={index}>
-            <h3>{query.data.title}</h3>
-            <p>{query.data.people?.[0]?.name}</p>
-          </article>
-        )
-      })}
+
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {objectQueries.map((query, index) => {
+          if (query.isLoading) return <p key={index}>Loading object...</p>
+          if (query.error) return <p key={index}>Error loading object.</p>
+          if (!query.data) return null
+
+          return (
+            <article
+              key={index}
+              className="bg-Turquoise rounded-xl shadow-md p-4 hover:shadow-lg transition"
+            >
+              <img
+                src={query.data.primaryimageurl || '/imageplaceholder.png'}
+                alt={query.data.title}
+                className="w-full h-48 object-cover rounded-md mb-4"
+              />
+              <h3 className="text-lg font-bold text-RoseQuartz">{query.data.title}</h3>
+              <p className="text-SpaceCadet">{query.data.people?.[0]?.name || 'Unknown Artist'}</p>
+            </article>
+          )
+        })}
+      </div>
     </section>
   )
 }

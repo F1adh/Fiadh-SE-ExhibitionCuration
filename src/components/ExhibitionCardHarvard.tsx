@@ -1,5 +1,4 @@
-import { Link } from "@tanstack/react-router"
-
+import { Link } from '@tanstack/react-router'
 
 interface People {
   name: string
@@ -23,7 +22,6 @@ export interface Props {
   isLoading: boolean
 }
 
-
 const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
   if (isLoading) return <div>Loading...</div>
   //if (error) return <div>Error loading exhibit.</div>
@@ -34,17 +32,22 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
         return (
           <li
             key={index}
-            className="max-h-20 flex flex-row bg-Turquoise  border-Coyote border-b-4"
+            className="max-h-20 w-full flex flex-row mt-5 bg-Turquoise  border-Coyote border-b-4 overflow-x-hidden shadow-sm shadow-Coyote"
           >
             <img
               src={record.primaryimageurl || '/imageplaceholder.png'}
               className="max-h-20 max-w-20 object-scale-down"
             />
-            <h3>{record.title}</h3>
-            <h4>{record.people?.[0]?.name}</h4>
-            
+
+            <div className="ml-5 flex flex-col justify-around flex-1">
+              <h3 className="text-lg font-semibold">{record.title}</h3>
+              <h4 className="text-sm text-gray-700">
+               Author: {record.people?.[0]?.name}
+              </h4>
+            </div>
+
             <Link to={`/Exhibition/${record.objectid}`}>
-              <button className="btn">View Details</button>
+              <button className="btn p-2 bg-RoseQuartz h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2">View Details</button>
             </Link>
           </li>
         )

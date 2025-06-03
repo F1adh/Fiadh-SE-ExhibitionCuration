@@ -58,7 +58,7 @@ function RouteComponent() {
   }, [page, metData.data])
 
   return (
-    <main className="flex flex-col w-screen min-h-screen ">
+    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly">
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
         {metData.isLoading && <div>Loading...</div>}

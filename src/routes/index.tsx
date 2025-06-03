@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <main className="grid grid-rows-3 w-screen min-h-screen ">
+    <main className="grid grid-rows-3 w-full min-h-screen overflow-x-hidden">
       <section className=" w-full min-h-[30vh] relative">
         <img
           src="/HomeImg.jpg"
