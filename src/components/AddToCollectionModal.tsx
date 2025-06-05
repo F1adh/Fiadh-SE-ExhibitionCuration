@@ -12,9 +12,10 @@ type Collection = {
 interface Props {
   objectId: string
   closeModal: () => void
+  museum: string
 }
 
-const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal }) => {
+const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal, museum }) => {
   
   const [input, setInput] = useState('')
   
@@ -34,12 +35,12 @@ const AddToCollectionModal: React.FC<Props> = ({ objectId, closeModal }) => {
     const error = await addToCollections(input)
     console.log(error)
     closeModal()
-    setIsSent(true)
+    
     //refetch here
   }
 
   const addObject = async(collectionId: string) => {
-    const error = await addObjectToCollection({collectionId, objectId})
+    const error = await addObjectToCollection({collectionId, objectId, museum})
   }
 
   if (isLoading) return <div>Loading...</div>

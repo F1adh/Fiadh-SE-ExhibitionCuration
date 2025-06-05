@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useQueries, useQuery } from '@tanstack/react-query'
+import {  useQuery } from '@tanstack/react-query'
 
 import { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
@@ -8,19 +8,18 @@ import { IconContext } from 'react-icons'
 import Filtertoolbar from '@/components/Filtertoolbar'
 import Exhibitioncardone from '@/components/ExhibitionCardMet'
 
-import fetchMetIDs from '@/api/metApi'
+import fetchMetIDs from '@/api/metObjectsApi'
 
-import fetchHarvardObjects from '@/api/harvardApi'
-import ExhibitionCardHarvard from '@/components/ExhibitionCardHarvard'
 
-export const Route = createFileRoute('/ExhibitionsTest')({
+
+export const Route = createFileRoute('/ExhibitionsMet')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
   const [page, setPage] = useState<number>(0)
   const [filterData, setFilterData] = useState<number[]>([])
-  const objectNumber = 5
+  const objectNumber = 10
   const [search, setSearch] = useState<string>('')
 
   const onInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -33,17 +32,9 @@ function RouteComponent() {
     harvardData.refetch()
   }
 
-  const [metData, harvardData] = useQueries({
-    queries: [
-      {
-        queryKey: ['metExhibitIDs', search],
-        queryFn: () => fetchMetIDs(search),
-      },
-      {
-        queryKey: ['harvardExhibitIDs', search],
-        queryFn: () => fetchHarvardObjects(search),
-      },
-    ],
+  const metData = useQuery({
+    queryKey: ['metExhibitIDs', search],
+    queryFn: () => fetchMetIDs(search),
   })
 
   useEffect(() => {
@@ -67,13 +58,6 @@ function RouteComponent() {
             filterData.map((exhibit, index) => {
               return <Exhibitioncardone key={index} objectID={exhibit} />
             })}
-
-          {harvardData.data && (
-            <ExhibitionCardHarvard
-              records={harvardData.data}
-              isLoading={harvardData.isLoading}
-            />
-          )}
         </ul>
       </section>
 

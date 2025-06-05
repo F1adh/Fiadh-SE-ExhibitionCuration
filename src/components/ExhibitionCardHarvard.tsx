@@ -23,6 +23,8 @@ export interface Props {
 }
 
 const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
+  const museum = 'Harvard'
+
   if (isLoading) return <div>Loading...</div>
   //if (error) return <div>Error loading exhibit.</div>
 
@@ -46,7 +48,7 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
               </h4>
             </div>
 
-            <Link to={`/Exhibition/${record.objectid}`}>
+            <Link to={`/Exhibition/${museum}/${record.objectid}`}>
               <button className="btn p-2 bg-RoseQuartz h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2">View Details</button>
             </Link>
           </li>
