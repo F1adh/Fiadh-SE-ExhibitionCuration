@@ -15,9 +15,8 @@ interface ObjectRecord {
 
 
 
-const harvardObjectApi = async (id: string): Promise<ObjectRecord> => {
+const harvardObjectApi = async (id:string): Promise<ObjectRecord> => {
 
-    
   const queryResponse = await axios({
     method: 'get',
     url: `https://api.harvardartmuseums.org/object/${id}?size=5&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,

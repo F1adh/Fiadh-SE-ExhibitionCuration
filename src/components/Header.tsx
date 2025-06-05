@@ -29,11 +29,11 @@ export default function Header() {
             </div>
 
             <div className="px-2 font-bold border-b-2 border-transparent xhover:border-solid hover:border-b-2 hover:border-Turquoise w-fit">
-              <Link to="/Exhibitions">Browse Exhibitions</Link>
+              <Link to="/ExhibitionsMet">Browse Metropolitan Exhibitions</Link>
             </div>
 
             <div className="px-2 font-bold border-b-2 border-transparent xhover:border-solid hover:border-b-2 hover:border-Turquoise w-fit">
-              <Link to="/ExhibitionsTest">Browse Exhibitions 2</Link>
+              <Link to="/ExhibitionsHarvard">Browse Harvard Exhibitions</Link>
             </div>
 
             <div className="px-2 font-bold border-b-2 border-transparent xhover:border-solid hover:border-b-2 hover:border-Turquoise w-fit">

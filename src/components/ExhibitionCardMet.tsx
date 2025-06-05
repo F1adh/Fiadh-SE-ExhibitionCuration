@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
 import axios from 'axios'
 
 export interface Props {
@@ -6,11 +7,13 @@ export interface Props {
 }
 
 const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
+  const museum = 'Met'
+
   const fetchExhibit = async () => {
     const response = await axios.get(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`,
     )
-  
+
     return response.data
   }
 
@@ -23,14 +26,22 @@ const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
   if (error) return <div>Error loading exhibit.</div>
 
   return (
-    <li className="max-h-20 flex flex-row bg-Turquoise  border-Coyote border-b-4">
+    <li className="max-h-20 w-full flex flex-row mt-5 bg-Turquoise  border-Coyote border-b-4 overflow-x-hidden shadow-sm shadow-Coyote">
       <img
         src={data.primaryImageSmall || '/imageplaceholder.png'}
         className="max-h-20 max-w-20 object-scale-down"
       />
-      <h3>{data.title}</h3>
-      <h4>{data.artistDisplayName}</h4>
 
+      <div className="ml-5 flex flex-col justify-around flex-1">
+        <h3 className="text-lg font-semibold">{data.title}</h3>
+        <h4 className="text-sm text-gray-700">{data.artistDisplayName}</h4>
+      </div>
+
+      <Link to={`/Exhibition/${museum}/${objectID}`}>
+        <button className="btn p-2 bg-RoseQuartz h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2">
+          View Details
+        </button>
+      </Link>
     </li>
   )
 }

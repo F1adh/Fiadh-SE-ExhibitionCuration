@@ -13,21 +13,31 @@ interface ObjectRecord {
 }
 
 interface RecordsData {
-  info: object
+  info: {
+    page: number
+    pages: number
+    next?: string
+    prev?: string
+  }
   records: ObjectRecord[]
 }
 
-const fetchHarvardObjects = async (search: string): Promise<RecordsData> => {
+interface queryParams{
+  search: string
+  page: number
+}
+
+const fetchHarvardObjects = async ({search, page}: queryParams): Promise<RecordsData> => {
   if (search === '') {
     const queryResponse = await axios({
       method: 'get',
-      url: `https://api.harvardartmuseums.org/object?size=5&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
+      url: `https://api.harvardartmuseums.org/object?size=10&page=${page}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
     })
     return queryResponse.data
   } else {
     const queryResponse = await axios({
       method: 'get',
-      url: `https://api.harvardartmuseums.org/object?size=5&q=${search}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
+      url: `https://api.harvardartmuseums.org/object?size=10&q=${search}&page=${page}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
     })
     return queryResponse.data
   }

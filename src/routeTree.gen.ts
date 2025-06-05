@@ -13,15 +13,15 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as MuseumsImport } from './routes/Museums'
 import { Route as FooterImport } from './routes/Footer'
-import { Route as ExhibitionsTestImport } from './routes/ExhibitionsTest'
-import { Route as ExhibitionsImport } from './routes/Exhibitions'
+import { Route as ExhibitionsMetImport } from './routes/ExhibitionsMet'
+import { Route as ExhibitionsHarvardImport } from './routes/ExhibitionsHarvard'
 import { Route as ContactImport } from './routes/Contact'
 import { Route as CollectionsImport } from './routes/Collections'
 import { Route as AboutImport } from './routes/About'
 import { Route as IndexImport } from './routes/index'
 import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
-import { Route as ExhibitionIdImport } from './routes/Exhibition/$id'
 import { Route as CollectionCollectionIdImport } from './routes/Collection/$collectionId'
+import { Route as ExhibitionMuseumIdImport } from './routes/Exhibition/$museum/$id'
 
 // Create/Update Routes
 
@@ -37,15 +37,15 @@ const FooterRoute = FooterImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ExhibitionsTestRoute = ExhibitionsTestImport.update({
-  id: '/ExhibitionsTest',
-  path: '/ExhibitionsTest',
+const ExhibitionsMetRoute = ExhibitionsMetImport.update({
+  id: '/ExhibitionsMet',
+  path: '/ExhibitionsMet',
   getParentRoute: () => rootRoute,
 } as any)
 
-const ExhibitionsRoute = ExhibitionsImport.update({
-  id: '/Exhibitions',
-  path: '/Exhibitions',
+const ExhibitionsHarvardRoute = ExhibitionsHarvardImport.update({
+  id: '/ExhibitionsHarvard',
+  path: '/ExhibitionsHarvard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -79,15 +79,15 @@ const DemoTanstackQueryRoute = DemoTanstackQueryImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ExhibitionIdRoute = ExhibitionIdImport.update({
-  id: '/Exhibition/$id',
-  path: '/Exhibition/$id',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const CollectionCollectionIdRoute = CollectionCollectionIdImport.update({
   id: '/Collection/$collectionId',
   path: '/Collection/$collectionId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExhibitionMuseumIdRoute = ExhibitionMuseumIdImport.update({
+  id: '/Exhibition/$museum/$id',
+  path: '/Exhibition/$museum/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -123,18 +123,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactImport
       parentRoute: typeof rootRoute
     }
-    '/Exhibitions': {
-      id: '/Exhibitions'
-      path: '/Exhibitions'
-      fullPath: '/Exhibitions'
-      preLoaderRoute: typeof ExhibitionsImport
+    '/ExhibitionsHarvard': {
+      id: '/ExhibitionsHarvard'
+      path: '/ExhibitionsHarvard'
+      fullPath: '/ExhibitionsHarvard'
+      preLoaderRoute: typeof ExhibitionsHarvardImport
       parentRoute: typeof rootRoute
     }
-    '/ExhibitionsTest': {
-      id: '/ExhibitionsTest'
-      path: '/ExhibitionsTest'
-      fullPath: '/ExhibitionsTest'
-      preLoaderRoute: typeof ExhibitionsTestImport
+    '/ExhibitionsMet': {
+      id: '/ExhibitionsMet'
+      path: '/ExhibitionsMet'
+      fullPath: '/ExhibitionsMet'
+      preLoaderRoute: typeof ExhibitionsMetImport
       parentRoute: typeof rootRoute
     }
     '/Footer': {
@@ -158,18 +158,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionCollectionIdImport
       parentRoute: typeof rootRoute
     }
-    '/Exhibition/$id': {
-      id: '/Exhibition/$id'
-      path: '/Exhibition/$id'
-      fullPath: '/Exhibition/$id'
-      preLoaderRoute: typeof ExhibitionIdImport
-      parentRoute: typeof rootRoute
-    }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
       path: '/demo/tanstack-query'
       fullPath: '/demo/tanstack-query'
       preLoaderRoute: typeof DemoTanstackQueryImport
+      parentRoute: typeof rootRoute
+    }
+    '/Exhibition/$museum/$id': {
+      id: '/Exhibition/$museum/$id'
+      path: '/Exhibition/$museum/$id'
+      fullPath: '/Exhibition/$museum/$id'
+      preLoaderRoute: typeof ExhibitionMuseumIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -182,13 +182,13 @@ export interface FileRoutesByFullPath {
   '/About': typeof AboutRoute
   '/Collections': typeof CollectionsRoute
   '/Contact': typeof ContactRoute
-  '/Exhibitions': typeof ExhibitionsRoute
-  '/ExhibitionsTest': typeof ExhibitionsTestRoute
+  '/ExhibitionsHarvard': typeof ExhibitionsHarvardRoute
+  '/ExhibitionsMet': typeof ExhibitionsMetRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
   '/Collection/$collectionId': typeof CollectionCollectionIdRoute
-  '/Exhibition/$id': typeof ExhibitionIdRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/Exhibition/$museum/$id': typeof ExhibitionMuseumIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -196,13 +196,13 @@ export interface FileRoutesByTo {
   '/About': typeof AboutRoute
   '/Collections': typeof CollectionsRoute
   '/Contact': typeof ContactRoute
-  '/Exhibitions': typeof ExhibitionsRoute
-  '/ExhibitionsTest': typeof ExhibitionsTestRoute
+  '/ExhibitionsHarvard': typeof ExhibitionsHarvardRoute
+  '/ExhibitionsMet': typeof ExhibitionsMetRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
   '/Collection/$collectionId': typeof CollectionCollectionIdRoute
-  '/Exhibition/$id': typeof ExhibitionIdRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/Exhibition/$museum/$id': typeof ExhibitionMuseumIdRoute
 }
 
 export interface FileRoutesById {
@@ -211,13 +211,13 @@ export interface FileRoutesById {
   '/About': typeof AboutRoute
   '/Collections': typeof CollectionsRoute
   '/Contact': typeof ContactRoute
-  '/Exhibitions': typeof ExhibitionsRoute
-  '/ExhibitionsTest': typeof ExhibitionsTestRoute
+  '/ExhibitionsHarvard': typeof ExhibitionsHarvardRoute
+  '/ExhibitionsMet': typeof ExhibitionsMetRoute
   '/Footer': typeof FooterRoute
   '/Museums': typeof MuseumsRoute
   '/Collection/$collectionId': typeof CollectionCollectionIdRoute
-  '/Exhibition/$id': typeof ExhibitionIdRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/Exhibition/$museum/$id': typeof ExhibitionMuseumIdRoute
 }
 
 export interface FileRouteTypes {
@@ -227,39 +227,39 @@ export interface FileRouteTypes {
     | '/About'
     | '/Collections'
     | '/Contact'
-    | '/Exhibitions'
-    | '/ExhibitionsTest'
+    | '/ExhibitionsHarvard'
+    | '/ExhibitionsMet'
     | '/Footer'
     | '/Museums'
     | '/Collection/$collectionId'
-    | '/Exhibition/$id'
     | '/demo/tanstack-query'
+    | '/Exhibition/$museum/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/About'
     | '/Collections'
     | '/Contact'
-    | '/Exhibitions'
-    | '/ExhibitionsTest'
+    | '/ExhibitionsHarvard'
+    | '/ExhibitionsMet'
     | '/Footer'
     | '/Museums'
     | '/Collection/$collectionId'
-    | '/Exhibition/$id'
     | '/demo/tanstack-query'
+    | '/Exhibition/$museum/$id'
   id:
     | '__root__'
     | '/'
     | '/About'
     | '/Collections'
     | '/Contact'
-    | '/Exhibitions'
-    | '/ExhibitionsTest'
+    | '/ExhibitionsHarvard'
+    | '/ExhibitionsMet'
     | '/Footer'
     | '/Museums'
     | '/Collection/$collectionId'
-    | '/Exhibition/$id'
     | '/demo/tanstack-query'
+    | '/Exhibition/$museum/$id'
   fileRoutesById: FileRoutesById
 }
 
@@ -268,13 +268,13 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CollectionsRoute: typeof CollectionsRoute
   ContactRoute: typeof ContactRoute
-  ExhibitionsRoute: typeof ExhibitionsRoute
-  ExhibitionsTestRoute: typeof ExhibitionsTestRoute
+  ExhibitionsHarvardRoute: typeof ExhibitionsHarvardRoute
+  ExhibitionsMetRoute: typeof ExhibitionsMetRoute
   FooterRoute: typeof FooterRoute
   MuseumsRoute: typeof MuseumsRoute
   CollectionCollectionIdRoute: typeof CollectionCollectionIdRoute
-  ExhibitionIdRoute: typeof ExhibitionIdRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  ExhibitionMuseumIdRoute: typeof ExhibitionMuseumIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -282,13 +282,13 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CollectionsRoute: CollectionsRoute,
   ContactRoute: ContactRoute,
-  ExhibitionsRoute: ExhibitionsRoute,
-  ExhibitionsTestRoute: ExhibitionsTestRoute,
+  ExhibitionsHarvardRoute: ExhibitionsHarvardRoute,
+  ExhibitionsMetRoute: ExhibitionsMetRoute,
   FooterRoute: FooterRoute,
   MuseumsRoute: MuseumsRoute,
   CollectionCollectionIdRoute: CollectionCollectionIdRoute,
-  ExhibitionIdRoute: ExhibitionIdRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  ExhibitionMuseumIdRoute: ExhibitionMuseumIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -305,13 +305,13 @@ export const routeTree = rootRoute
         "/About",
         "/Collections",
         "/Contact",
-        "/Exhibitions",
-        "/ExhibitionsTest",
+        "/ExhibitionsHarvard",
+        "/ExhibitionsMet",
         "/Footer",
         "/Museums",
         "/Collection/$collectionId",
-        "/Exhibition/$id",
-        "/demo/tanstack-query"
+        "/demo/tanstack-query",
+        "/Exhibition/$museum/$id"
       ]
     },
     "/": {
@@ -326,11 +326,11 @@ export const routeTree = rootRoute
     "/Contact": {
       "filePath": "Contact.tsx"
     },
-    "/Exhibitions": {
-      "filePath": "Exhibitions.tsx"
+    "/ExhibitionsHarvard": {
+      "filePath": "ExhibitionsHarvard.tsx"
     },
-    "/ExhibitionsTest": {
-      "filePath": "ExhibitionsTest.tsx"
+    "/ExhibitionsMet": {
+      "filePath": "ExhibitionsMet.tsx"
     },
     "/Footer": {
       "filePath": "Footer.tsx"
@@ -341,11 +341,11 @@ export const routeTree = rootRoute
     "/Collection/$collectionId": {
       "filePath": "Collection/$collectionId.tsx"
     },
-    "/Exhibition/$id": {
-      "filePath": "Exhibition/$id.tsx"
-    },
     "/demo/tanstack-query": {
       "filePath": "demo.tanstack-query.tsx"
+    },
+    "/Exhibition/$museum/$id": {
+      "filePath": "Exhibition/$museum/$id.tsx"
     }
   }
 }
