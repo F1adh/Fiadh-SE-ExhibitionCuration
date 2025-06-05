@@ -4,6 +4,7 @@ interface Params {
   collectionId: string
   objectId: string
   museum: string
+  
 }
 
 const addObjectToCollection = async ({ collectionId, objectId, museum }: Params) => {

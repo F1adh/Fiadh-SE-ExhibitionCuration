@@ -2,6 +2,7 @@ import axios from "axios"
 
 interface ObjectRecord{
 objectID: number
+objectName: string
 primaryImage: string
 title: string
 artistDisplayName: string

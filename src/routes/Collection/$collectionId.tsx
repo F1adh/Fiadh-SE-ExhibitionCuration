@@ -1,5 +1,4 @@
-import harvardObjectApi from '@/api/harvardObjectApi'
-
+import getObjectByMuseum from '@/api/getObjectByMuseum'
 import getCollectionObjects from '@/supabaseQueries/getCollectionObjects'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
@@ -13,14 +12,14 @@ function RouteComponent() {
 
   const { data } = useQuery({
     queryKey: ['collectionObjects', collectionId],
-    queryFn: () => getCollectionObjects(collectionId),
+    queryFn: () => getCollectionObjects(collectionId), //returns everything in collection
   })
 
   const objectQueries = useQueries({
     queries:
       data?.map((object) => ({
-        queryKey: ['harvardObject', object.object_id],
-        queryFn: () => harvardObjectApi(object.object_id.toString()), //api requires string for search
+        queryKey: ['object', object.object_id, object.museum],
+        queryFn: () => getObjectByMuseum(object.museum, object.object_id.toString()), //api requires string for search
       })) ?? [],
   })
 
@@ -37,19 +36,42 @@ function RouteComponent() {
           if (query.error) return <p key={index}>Error loading object.</p>
           if (!query.data) return null
 
+          
           return (
-            <article
-              key={index}
-              className="bg-Turquoise rounded-xl shadow-md p-4 hover:shadow-lg transition"
+            <article className="shadow-md shadow-Coyote">
+            <img
+              src={
+                query.data.source === 'Harvard'
+                  ? query.data.primaryimageurl || '/imageplaceholder.png'
+                  : query.data.primaryImage || '/imageplaceholder.png'
+              }
+              alt={query.data.title}
+            />
+            <h3 className="text-xl bg-RoseQuartz">Title: {query.data.title}</h3>
+
+            <h3>
+              Author:{' '}
+              {query.data.source === 'Harvard'
+                ? query.data.people?.[0]?.name
+                : query.data.artistDisplayName || 'Unknown'}
+            </h3>
+
+            <a
+              href={query.data.source === 'Harvard' ? query.data.url : query.data.objectURL}
+              className="cursor-pointer text-SpaceCadet"
             >
-              <img
-                src={query.data.primaryimageurl || '/imageplaceholder.png'}
-                alt={query.data.title}
-                className="w-full h-48 object-cover rounded-md mb-4"
-              />
-              <h3 className="text-lg font-bold text-RoseQuartz">{query.data.title}</h3>
-              <p className="text-SpaceCadet">{query.data.people?.[0]?.name || 'Unknown Artist'}</p>
-            </article>
+              {query.data.department}: Click here for website
+            </a>
+
+            <div>
+              {query.data.source === 'Harvard'
+                ? query.data.description
+                : query.data.objectName || 'No description available'}
+            </div>
+
+            
+          </article>
+            
           )
         })}
       </div>

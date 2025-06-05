@@ -16,7 +16,7 @@ interface collectionDataType {
 }
 
 function RouteComponent() {
-  //buttons on each collection to take to details
+  
   //buttons on each collection to delete + "are you sure you want to delete"
   //preload data optional
 
@@ -26,7 +26,7 @@ function RouteComponent() {
     null,
   )
 
-  const { data, error } = useQuery<collectionDataType[]>({
+  const { data, error, refetch } = useQuery<collectionDataType[]>({
     queryKey: ['collectionData'],
     queryFn: getAllCollections,
   })
@@ -39,7 +39,7 @@ function RouteComponent() {
     e.preventDefault()
     const error = await addToCollections(input)
     console.log(error)
-
+    refetch()
     //refetch here
   }
 
@@ -48,7 +48,7 @@ function RouteComponent() {
   }
 
   return (
-    <>
+    <main className="flex-grow">
       <section className="bg-Turquoise p-6 rounded-lg shadow-md max-w-xl mx-auto mt-5">
         <h3 className="text-xl font-semibold mb-4 text-SpaceCadet">
           Create a New Collection
@@ -75,9 +75,9 @@ function RouteComponent() {
         </form>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5">
+      <section className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
         {data &&
-          data.map((collection, index) => {
+          data.map((collection) => {
             return (
               <article
                 key={collection.id}
@@ -116,6 +116,6 @@ function RouteComponent() {
             )
           })}
       </section>
-    </>
+    </main>
   )
 }

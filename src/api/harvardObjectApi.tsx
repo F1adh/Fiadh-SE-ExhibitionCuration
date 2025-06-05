@@ -21,7 +21,17 @@ const harvardObjectApi = async (id:string): Promise<ObjectRecord> => {
     method: 'get',
     url: `https://api.harvardartmuseums.org/object/${id}?size=5&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
   })
-  return queryResponse.data
+
+
+
+  return {
+    description: queryResponse.data.description ?? 'No description available',
+    department: queryResponse.data.department ?? 'Unknown department',
+    url: queryResponse.data.url ?? '',
+    primaryimageurl: queryResponse.data.primaryimageurl ?? '',
+    title: queryResponse.data.title ?? 'Untitled',
+    people: queryResponse.data.people ?? [],
+  }
 
 }
 

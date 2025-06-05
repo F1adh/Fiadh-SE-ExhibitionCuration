@@ -41,8 +41,10 @@ function RouteComponent() {
    
 })
 
+
+
   return (
-    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly">
+    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow">
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
         {harvardData.isLoading && <div>Loading...</div>}
