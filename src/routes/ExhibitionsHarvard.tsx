@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useQueries, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { useState } from 'react'
 
@@ -23,11 +23,11 @@ function RouteComponent() {
 
   
 
-  const onInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(e.currentTarget.value)
   }
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
     harvardData.refetch()
@@ -47,6 +47,7 @@ function RouteComponent() {
     <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow">
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
+        {harvardData.isError && <div>Error retrieving museum data: {harvardData.error.message}</div>}
         {harvardData.isLoading && <div>Loading...</div>}
         <ul>
           {harvardData.data && (

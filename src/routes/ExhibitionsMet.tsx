@@ -28,31 +28,32 @@ function RouteComponent() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    metData.refetch()
-    harvardData.refetch()
+    refetch()
+   
   }
 
-  const metData = useQuery({
+  const { data, refetch, isLoading, isError, error} = useQuery({
     queryKey: ['metExhibitIDs', search],
     queryFn: () => fetchMetIDs(search),
   })
 
   useEffect(() => {
-    if (Array.isArray(metData.data)) {
+    if (Array.isArray(data)) {
       setFilterData(
-        metData.data.filter(
+        data.filter(
           (_, index) =>
             index >= page * objectNumber && index < (page + 1) * objectNumber,
         ),
       )
     }
-  }, [page, metData.data])
+  }, [page, data])
 
   return (
     <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow">
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
-        {metData.isLoading && <div>Loading...</div>}
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Error fetching Met data: {error.message}</div>}
         <ul>
           {filterData &&
             filterData.map((exhibit, index) => {
@@ -62,13 +63,13 @@ function RouteComponent() {
       </section>
 
       <section>
-        {metData.data && (
+        {data && (
           <ReactPaginate
             containerClassName={'pagination flex flex-row items-center gap-2'}
             pageClassName={'page-item'}
             activeClassName={'active'}
             onPageChange={(event) => setPage(event.selected)}
-            pageCount={Math.ceil(metData.data.length / objectNumber)}
+            pageCount={Math.ceil(data.length / objectNumber)}
             pageRangeDisplayed={5}
             breakLabel="..."
             previousLabel={

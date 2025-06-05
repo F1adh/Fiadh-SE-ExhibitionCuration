@@ -1,11 +1,11 @@
 interface Props{
-    onInputChange: (e)=>void
-    onSubmit: (e)=>void
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>)=>void
+    onSubmit: (e: React.FormEvent<HTMLFormElement>)=>void
 }
 
 
 const Filtertoolbar: React.FC<Props> = ({onInputChange, onSubmit}) => {
-  var centuries = [
+  /*var centuries = [
     '1st',
     '2nd',
     '3rd',
@@ -28,7 +28,7 @@ const Filtertoolbar: React.FC<Props> = ({onInputChange, onSubmit}) => {
     '20th',
     '21st',
   ]
-
+*/
   
 
   return (
