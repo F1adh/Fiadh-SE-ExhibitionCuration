@@ -1,5 +1,4 @@
 import getObjectByMuseum from '@/api/getObjectByMuseum'
-import harvardObjectApi from '@/api/harvardObjectApi'
 import AddToCollectionModal from '@/components/AddToCollectionModal'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
@@ -17,19 +16,21 @@ function RouteComponent() {
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 
-  const { data } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['objectRecord', id],
     queryFn: () => getObjectByMuseum(museum, id), //separate api file, expect museum string and id.
   })
 
   return (
     <section className="bg-Turquoise max-w-full overflow-x-hidden">
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error retrieving object data: {error.message}</div>}
       {data && (
         <>
           <article className="shadow-md shadow-Coyote">
             <img
               src={
-                museum === 'harvard'
+                data.source === 'Harvard'
                   ? data.primaryimageurl || '/imageplaceholder.png'
                   : data.primaryImage || '/imageplaceholder.png'
               }
@@ -39,20 +40,20 @@ function RouteComponent() {
 
             <h3>
               Author:{' '}
-              {museum === 'harvard'
+              {data.source === 'Harvard'
                 ? data.people?.[0]?.name
                 : data.artistDisplayName || 'Unknown'}
             </h3>
 
             <a
-              href={museum === 'harvard' ? data.url : data.objectURL}
+              href={data.source === 'Harvard' ? data.url : data.objectURL}
               className="cursor-pointer text-SpaceCadet"
             >
               {data.department}: Click here for website
             </a>
 
             <div>
-              {museum === 'harvard'
+              {data.source === 'Harvard'
                 ? data.description
                 : data.objectName || 'No description available'}
             </div>

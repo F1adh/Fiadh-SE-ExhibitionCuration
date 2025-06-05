@@ -12,7 +12,9 @@ const addObjectToCollection = async ({ collectionId, objectId, museum }: Params)
     .from('objects')
     .insert({ object_id: objectId, collection_id: collectionId, museum: museum })
 
-  return error
+  if(error){
+    throw new Error('Error adding object to collection')
+  }
 }
 
 export default addObjectToCollection

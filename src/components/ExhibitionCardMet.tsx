@@ -37,11 +37,13 @@ const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
         <h4 className="text-sm text-gray-700">{data.artistDisplayName}</h4>
       </div>
 
-      <Link to={`/Exhibition/${museum}/${objectID}`}>
+      <Link to="/Exhibition/$museum/$id" params={{museum: museum, id: objectID.toString()}}>
         <button className="btn p-2 bg-RoseQuartz h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2">
           View Details
         </button>
       </Link>
+
+      
     </li>
   )
 }

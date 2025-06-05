@@ -26,7 +26,7 @@ function RouteComponent() {
     null,
   )
 
-  const { data, error, refetch } = useQuery<collectionDataType[]>({
+  const { data, error, isError, refetch, isLoading } = useQuery<collectionDataType[]>({
     queryKey: ['collectionData'],
     queryFn: getAllCollections,
   })
@@ -49,6 +49,8 @@ function RouteComponent() {
 
   return (
     <main className="flex-grow">
+      {isLoading&& <div>Loading...</div>}
+      {isError&& <div>Error fetching collection data: {error.message}</div>}
       <section className="bg-Turquoise p-6 rounded-lg shadow-md max-w-xl mx-auto mt-5">
         <h3 className="text-xl font-semibold mb-4 text-SpaceCadet">
           Create a New Collection
@@ -102,7 +104,7 @@ function RouteComponent() {
                     Edit Collection
                   </button>
 
-                  <Link to={`/Collection/${collection.id}`}>
+                  <Link to="/Collection/$collectionId" params={{collectionId: collection.id.toString()}}>
                     <button className="w-full bg-SpaceCadet text-white px-4 py-2 rounded hover:bg-blue-900 transition">
                       View Details
                     </button>
