@@ -49,7 +49,7 @@ function RouteComponent() {
   }, [page, data])
 
   return (
-    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow">
+    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow bg-blue-100">
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
         {isLoading && <div>Loading...</div>}

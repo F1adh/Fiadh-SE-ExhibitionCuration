@@ -1,3 +1,5 @@
+
+
 import { useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import axios from 'axios'
@@ -26,24 +28,31 @@ const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
   if (error) return <div>Error loading exhibit.</div>
 
   return (
-    <li className="max-h-20 w-full flex flex-row mt-5 bg-Turquoise  border-Coyote border-b-4 overflow-x-hidden shadow-sm shadow-Coyote">
+    <li className="max-h-25 sm:w-full md:w-full lg:w-1/2  lg:m-auto flex flex-row lg:mt-4 sm:mt-2 md:mt-2 bg-blue-200  border-Coyote border-b-2 overflow-x-hidden overflow-y-hidden shadow-sm shadow-Coyote">
       <img
         src={data.primaryImageSmall || '/imageplaceholder.png'}
-        className="max-h-20 max-w-20 object-scale-down"
+        className="h-20 w-20 object-scale-down"
       />
 
-      <div className="ml-5 flex flex-col justify-around flex-1">
+      <div className="ml-5 mt-2 flex flex-col flex-1 ">
         <h3 className="text-lg font-semibold">{data.title}</h3>
-        <h4 className="text-sm text-gray-700">{data.artistDisplayName}</h4>
+
+        {data.artistDisplayName && (
+          <h4 className="text-sm text-Coyote border-b-2 border-SpaceCadet md:w-3/8">{data.artistDisplayName}</h4>
+        )}
+        {!data.artistDisplayName && (
+          <h4 className="text-sm text-Coyote border-b-2 border-SpaceCadet md:w-3/8">Artist unknown</h4>
+        )}
       </div>
 
-      <Link to="/Exhibition/$museum/$id" params={{museum: museum, id: objectID.toString()}}>
-        <button className="btn p-2 bg-RoseQuartz h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2">
+      <Link
+        to="/Exhibition/$museum/$id"
+        params={{ museum: museum, id: objectID.toString() }}
+      >
+        <button className="btn p-2 bg-Turquoise h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2 cursor-pointer border-l-2 border-Coyote">
           View Details
         </button>
       </Link>
-
-      
     </li>
   )
 }
