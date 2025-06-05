@@ -39,7 +39,7 @@ const Filtertoolbar: React.FC<Props> = ({onInputChange, onSubmit}) => {
           type="text"
           className="border-black border-2 p-1 rounded-sm"
           onChange={(e)=> onInputChange(e)}
-          placeholder="Search term"
+          placeholder="e.g., rome"
         />
         {/*
         <select onChange={onSelectChange}>
