@@ -32,13 +32,14 @@ const Filtertoolbar: React.FC<Props> = ({onInputChange, onSubmit}) => {
   
 
   return (
-    <menu className="w-screen min-h-20 bg-MintGreen border-black border-solid">
-      <h2>Filter</h2>
-      <form onSubmit={onSubmit}>
+    <menu className="w-screen min-h-20 bg-MintGreen border-RoseQuartz border-b-2 border-solid ">
+      <h2 className="p-2">Filter</h2>
+      <form onSubmit={onSubmit} className="flex flex-row p-2 gap-2">
         <input
           type="text"
-          className="border-black border-2"
+          className="border-black border-2 p-1 rounded-sm"
           onChange={(e)=> onInputChange(e)}
+          placeholder="Search term"
         />
         {/*
         <select onChange={onSelectChange}>
@@ -52,7 +53,7 @@ const Filtertoolbar: React.FC<Props> = ({onInputChange, onSubmit}) => {
         </select>
         <input type="text" className="border-black border-2" onChange={onInputChange} />
         */}
-        <button type="submit">Search</button>
+        <button type="submit" className="p-1 border-black border-2 rounded-sm">Search</button>
       </form>
     </menu>
   )

@@ -34,16 +34,16 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
         return (
           <li
             key={index}
-            className="max-h-20 w-full flex flex-row mt-5 bg-Turquoise  border-Coyote border-b-4 overflow-x-hidden shadow-sm shadow-Coyote"
+            className="max-h-25 sm:w-full md:w-full lg:w-1/2  lg:m-auto flex flex-row lg:mt-4 sm:mt-2 md:mt-2 bg-blue-200  border-Coyote border-b-2 overflow-x-hidden overflow-y-hidden shadow-sm shadow-Coyote"
           >
             <img
               src={record.primaryimageurl || '/imageplaceholder.png'}
-              className="max-h-20 max-w-20 object-scale-down"
+              className="h-20 w-20 object-scale-down"
             />
   
-            <div className="ml-5 flex flex-col justify-around flex-1">
+            <div className="ml-5 mt-2 flex flex-col flex-1 ">
               <h3 className="text-lg font-semibold">{record.title}</h3>
-              <h4 className="text-sm text-gray-700">
+              <h4 className="text-sm text-Coyote border-b-2 border-SpaceCadet md:w-3/8">
                 Author: {record.people?.[0]?.name}
               </h4>
             </div>
@@ -52,7 +52,7 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
               to="/Exhibition/$museum/$id"
               params={{ museum: museum, id: record.objectid.toString() }}
             >
-              <button className="btn p-2 bg-RoseQuartz h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2">
+              <button className="btn p-2 bg-Turquoise h-full hover:underline hover:decoration-MintGreen hover:underline-offset-2 cursor-pointer border-l-2 border-Coyote">
                 View Details
               </button>
             </Link>
@@ -64,3 +64,6 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
 }
 
 export default ExhibitionCardHarvard
+
+
+
