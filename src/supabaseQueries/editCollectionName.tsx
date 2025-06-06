@@ -4,7 +4,8 @@ const editCollectionName = async (
   newName: string,
   collectionId: number | null,
 ) => {
-  if ((collectionId = null)) {
+    
+  if (collectionId === null) {
     throw new Error(
       'there was an internal issue updating the name. Please try again.',
     )
