@@ -6,7 +6,9 @@ interface People {
 }
 
 interface ObjectRecordHarvard {
+  
   source: 'Harvard';
+  id: number
   description: string
   department: string
   url: string

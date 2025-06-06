@@ -1,6 +1,7 @@
 import EditCollectionModal from '@/components/EditCollectionModal'
 import addToCollections from '@/supabaseQueries/addToCollections'
 import deleteCollection from '@/supabaseQueries/deleteCollection'
+import editCollectionName from '@/supabaseQueries/editCollectionName'
 import getAllCollections from '@/supabaseQueries/getAllCollections'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -20,6 +21,7 @@ function RouteComponent() {
   //preload data optional
 
   const [input, setInput] = useState('')
+  const [editInput, setEditInput] = useState('')
 
   const [activeCollectionId, setActiveCollectionId] = useState<number | null>(
     null,
@@ -42,11 +44,21 @@ function RouteComponent() {
     console.log(error)
     refetch()
     //refetch here
-  }
+  } //update to useQueries
 
   const onDelete = async (collectionId: number) => {
     deleteCollection(collectionId)
   }
+
+  const onEditInputChange = async(e: React.FormEvent<HTMLInputElement>)=>{
+    setEditInput(e.currentTarget.value)
+  }
+
+  const onEditSubmit = async(e: React.FormEvent)=>{
+    e.preventDefault()
+    editCollectionName(editInput, activeCollectionId)
+    refetch()
+  } //update to useQueries
 
   return (
     <main className="flex-grow bg-blue-200">
@@ -121,7 +133,7 @@ function RouteComponent() {
                   </Link>
 
                   {activeCollectionId === collection.id && (
-                    <EditCollectionModal />
+                    <EditCollectionModal onEditInputChange={onEditInputChange} onEditSubmit={onEditSubmit}/>
                   )}
                 </div>
               </article>
