@@ -42,22 +42,28 @@ function RouteComponent() {
     e.preventDefault()
     const error = await addToCollections(input)
     console.log(error)
+    setInput('')
     refetch()
+    
     //refetch here
   } //update to useQueries
 
   const onDelete = async (collectionId: number) => {
-    deleteCollection(collectionId)
+    await deleteCollection(collectionId)
+    refetch()
   }
 
   const onEditInputChange = async(e: React.FormEvent<HTMLInputElement>)=>{
-    setEditInput(e.currentTarget.value)
+    await setEditInput(e.currentTarget.value)
   }
 
   const onEditSubmit = async(e: React.FormEvent)=>{
     e.preventDefault()
-    editCollectionName(editInput, activeCollectionId)
+    await editCollectionName(editInput, activeCollectionId)
+    setEditInput('')
     refetch()
+    
+    
   } //update to useQueries
 
   return (
@@ -83,6 +89,7 @@ function RouteComponent() {
                 className="w-full border-2 border-black p-2 rounded"
                 onChange={onInputChange}
                 placeholder="e.g., Ancient Artifacts"
+                value={input}
               />
             </div>
             <button
@@ -133,7 +140,7 @@ function RouteComponent() {
                   </Link>
 
                   {activeCollectionId === collection.id && (
-                    <EditCollectionModal onEditInputChange={onEditInputChange} onEditSubmit={onEditSubmit}/>
+                    <EditCollectionModal onEditInputChange={onEditInputChange} onEditSubmit={onEditSubmit} editInput={editInput}/>
                   )}
                 </div>
               </article>
