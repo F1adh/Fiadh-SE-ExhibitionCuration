@@ -33,13 +33,15 @@ const Filtertoolbar: React.FC<Props> = ({onInputChange, onSubmit}) => {
 
   return (
     <menu className="w-screen min-h-20 bg-MintGreen border-RoseQuartz border-b-2 border-solid ">
-      <h2 className="p-2">Filter</h2>
+      <h2 className="p-2 font-semibold">Filter</h2>
       <form onSubmit={onSubmit} className="flex flex-row p-2 gap-2">
+        <label className='p-2' htmlFor='text-search'>Text Search:</label>
         <input
           type="text"
           className="border-black border-2 p-1 rounded-sm"
           onChange={(e)=> onInputChange(e)}
           placeholder="e.g., rome"
+          id='text-search'
         />
         {/*
         <select onChange={onSelectChange}>

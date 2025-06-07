@@ -39,6 +39,7 @@ const ExhibitionCardHarvard: React.FC<Props> = ({ records, isLoading }) => {
             <img
               src={record.primaryimageurl || '/imageplaceholder.png'}
               className="h-20 w-20 object-scale-down"
+              alt="image of artwork or museum object"
             />
   
             <div className="ml-5 mt-2 flex flex-col flex-1 ">

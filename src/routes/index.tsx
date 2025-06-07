@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <main className="grid grid-rows-3 w-full min-h-screen overflow-x-hidden">
+    <main className="grid grid-rows-3 w-full min-h-screen overflow-x-hidden" id='main-id' tabIndex={-1}>
       <section className=" w-full min-h-[30vh] relative">
         <img
           src="/HomeImg.jpg"
@@ -18,17 +18,17 @@ function App() {
 
         <div className="absolute inset-0 flex items-center justify-center">
           <div>
-            <h2 className="text-2xl text-MintGreen">For the Curious</h2>
-            <h3 className="text-xs text-MintGreen">
+            <h2 className="text-2xl text-black ">For the Curious</h2>
+            <h3 className="text-xs text-black ">
               Explore Our Unique Exhibits
             </h3>
           </div>
         </div>
       </section>
-      <section className="bg-SpaceCadet w-full">
+      <section className="bg-SpaceCadet w-full text-MintGreen">
         <h2>Our Picks</h2>
       </section>
-      <section className="bg-SpaceCadet w-full">
+      <section className="bg-SpaceCadet w-full text-MintGreen">
         <h2>Latest Blogs</h2>
       </section>
     </main>

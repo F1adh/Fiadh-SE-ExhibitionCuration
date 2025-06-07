@@ -11,15 +11,10 @@ type Collection = {
 
 interface Props {
   objectId: string
-  closeModal: () => void
   museum: string
 }
 
-const AddToCollectionModal: React.FC<Props> = ({
-  objectId,
-  closeModal,
-  museum,
-}) => {
+const AddToCollectionModal: React.FC<Props> = ({ objectId, museum }) => {
   const [input, setInput] = useState('')
   const [dbError, setDbError] = useState<string | null>(null)
   const [dbSuccess, setDbSuccess] = useState(false)
@@ -39,7 +34,7 @@ const AddToCollectionModal: React.FC<Props> = ({
     e.preventDefault()
     const error = await addToCollections(input)
     console.log(error)
-    closeModal()
+    setInput('')
     refetch()
   }
 
@@ -69,34 +64,36 @@ const AddToCollectionModal: React.FC<Props> = ({
           <li
             key={collection.id}
             onClick={() => addObject(collection.id.toString())}
-            className="cursor-pointer font-bold px-4 py-2 rounded hover:underline transition"
+            className="cursor-pointer font-bold px-4 py-2 rounded hover:underline transition bg-MintGreen"
           >
-            {collection.collection_name}
+            - {collection.collection_name}
           </li>
         ))}
       </ul>
 
       <h4 className="text-lg font-medium mb-2">Add a collection:</h4>
+      {dbError && (
+        <div className=" text-red-800 p-2 rounded mb-2">
+          Failed to add object: {dbError}
+        </div>
+      )}
+
+      {dbSuccess && !dbError && (
+        <div className=" text-green-800 p-2 rounded mb-2">
+          Object added to collection
+        </div>
+      )}
       <form onSubmit={onSubmit} className="flex flex-col gap-3">
         <input
           type="text"
           onChange={(e) => onInputChange(e)}
           className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="New collection"
+          value={input}
         ></input>
-        <button className="bg-RoseQuartz text-black rounded px-4 py-2 hover:bg-MintGreen transition">
+        <button className="bg-RoseQuartz text-black rounded px-4 py-2 hover:bg-MintGreen transition cursor-pointer">
           Submit
         </button>
-        {dbError !== null && (
-          <div>Object wasn't added to collection: {dbError}</div>
-        )}
-        {dbSuccess && !dbError &&(
-          <div>Object added to collection</div>
-        )
-
-        }
-
-        
       </form>
     </div>
   )

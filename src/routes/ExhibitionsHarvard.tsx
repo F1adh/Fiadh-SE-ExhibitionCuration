@@ -44,7 +44,7 @@ function RouteComponent() {
 
 
   return (
-    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow bg-blue-100">
+    <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow bg-blue-100" id='main-id'>
       <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
       <section>
         {harvardData.isError && <div>Error retrieving museum data: {harvardData.error.message}</div>}

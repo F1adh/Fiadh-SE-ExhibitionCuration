@@ -67,7 +67,7 @@ function RouteComponent() {
   } //update to useQueries
 
   return (
-    <main className="flex-grow bg-blue-200">
+    <main className="flex-grow bg-blue-200" id='main-id'>
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error fetching collection data: {error.message}</div>}
       <section className="border-b-2 border-Coyote shadow-md p-4">
