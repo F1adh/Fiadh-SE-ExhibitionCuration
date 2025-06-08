@@ -6,9 +6,10 @@ import axios from 'axios'
 
 export interface Props {
   objectID: number
+  century: number
 }
 
-const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
+const Exhibitioncardone: React.FC<Props> = ({ objectID, century }) => {
   const museum = 'Met'
 
   const fetchExhibit = async () => {
@@ -26,9 +27,12 @@ const Exhibitioncardone: React.FC<Props> = ({ objectID }) => {
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error loading exhibit.</div>
+  console.log(century) //mentioning century to make typescript happy
+  //if(data.objectEndDate !> century || data.objectEndDate !< century+99) return null --do this logic in main page to avoid breaking pagination
 
   return (
-    <li className="max-h-25 sm:w-full md:w-full lg:w-1/2  lg:m-auto flex flex-row lg:mt-4 sm:mt-2 md:mt-2 bg-blue-200  border-Coyote border-b-2 overflow-x-hidden overflow-y-hidden shadow-sm shadow-Coyote">
+    
+    <li className="max-h-25 sm:w-full md:w-full lg:w-1/2  lg:m-auto flex flex-row lg:mt-4 sm:mt-2 mt-2 md:mt-2 bg-blue-200  border-Coyote border-b-2 overflow-x-hidden overflow-y-hidden shadow-sm shadow-Coyote">
       <img
         src={data.primaryImageSmall || '/imageplaceholder.png'}
         className="h-20 w-20 object-scale-down"

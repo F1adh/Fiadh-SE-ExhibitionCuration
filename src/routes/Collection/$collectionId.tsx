@@ -26,7 +26,7 @@ function RouteComponent() {
   })
 
   return (
-    <section className="p-6 bg-MintGreen min-h-screen">
+    <main className="p-6 bg-MintGreen min-h-screen" id='main-id'>
       <h2 className="text-2xl font-semibold mb-6 text-SpaceCadet">
         Collection Objects
       </h2>
@@ -121,6 +121,6 @@ function RouteComponent() {
           )
         })}
       </div>
-    </section>
+    </main>
   )
 }

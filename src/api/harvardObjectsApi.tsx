@@ -5,6 +5,7 @@ interface People {
 }
 
 interface ObjectRecord {
+  
   objectid: number
   objectnumber: string
   primaryimageurl: string
@@ -24,11 +25,13 @@ interface RecordsData {
 
 interface queryParams {
   search: string
+  century: number
   page: number
 }
 
 const fetchHarvardObjects = async ({
   search,
+  century,
   page,
 }: queryParams): Promise<RecordsData> => {
   let queryResponse
@@ -36,12 +39,12 @@ const fetchHarvardObjects = async ({
   if (search === '') {
     queryResponse = await axios({
       method: 'get',
-      url: `https://api.harvardartmuseums.org/object?size=10&page=${page}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
+      url: `https://api.harvardartmuseums.org/object?size=10&page=${page}&dateend=${century}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
     })
   } else {
     queryResponse = await axios({
       method: 'get',
-      url: `https://api.harvardartmuseums.org/object?size=10&q=${search}&page=${page}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
+      url: `https://api.harvardartmuseums.org/object?size=10&q=${search}&page=${page}&dateend=${century}&apikey=${import.meta.env.VITE_HARVARD_API_KEY}`,
     })
   }
 

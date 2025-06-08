@@ -5,6 +5,7 @@ interface People {
 }
 
 interface ObjectRecord {
+  dateend:number
   id: number
   description: string
   department: string
@@ -24,6 +25,7 @@ const harvardObjectApi = async (id: string): Promise<ObjectRecord> => {
     throw new Error('Error fetching object info from Harvard museum')
   } else {
     return {
+      dateend: queryResponse.data.dateend ?? 'date unknown',
       id: queryResponse.data.id ?? 'no id',
       description: queryResponse.data.description ?? 'No description available',
       department: queryResponse.data.department ?? 'Unknown department',

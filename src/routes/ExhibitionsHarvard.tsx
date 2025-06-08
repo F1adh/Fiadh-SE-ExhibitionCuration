@@ -18,12 +18,15 @@ export const Route = createFileRoute('/ExhibitionsHarvard')({
 
 function RouteComponent() {
   const [search, setSearch] = useState<string>('')
+  const [century, setCentury] = useState<number>(1)
   const [page, setPage] = useState(1)
   
 
-  
+  const onCenturyChange = (e: React.ChangeEvent<HTMLInputElement>): void =>{
+    setCentury(Number(e.currentTarget.value)*100)
+  }
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const onPhraseChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(e.currentTarget.value)
   }
 
@@ -36,8 +39,8 @@ function RouteComponent() {
   
 
   const harvardData = useQuery({
-  queryKey: ['harvardExhibitIDs', search, page],
-  queryFn: () => fetchHarvardObjects({search, page}),
+  queryKey: ['harvardExhibitIDs', search, century, page],
+  queryFn: () => fetchHarvardObjects({search, century, page}),
    
 })
 
@@ -45,7 +48,7 @@ function RouteComponent() {
 
   return (
     <main className="flex flex-col w-full min-h-screen overflow-x-hidden justify-evenly flex-grow bg-blue-100" id='main-id'>
-      <Filtertoolbar onInputChange={onInputChange} onSubmit={onSubmit} />
+      <Filtertoolbar onPhraseChange={onPhraseChange} onCenturyChange={onCenturyChange} onSubmit={onSubmit} />
       <section>
         {harvardData.isError && <div>Error retrieving museum data: {harvardData.error.message}</div>}
         {harvardData.isLoading && <div>Loading...</div>}
