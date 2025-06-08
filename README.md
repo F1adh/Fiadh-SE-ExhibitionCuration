@@ -32,7 +32,7 @@ Please note: in order to have full functionality you will need to set up a .env 
 VITE_HARVARD_API_KEY=[Your Harvard museum API Key]
 VITE_SUPABASE_KEY=[Your Supabase API Key]
 
-###Your API keys should never be exposed, so ensure that add .env to .gitignore to avoid accidentally publishing your keys.
+### Your API keys should never be exposed, so ensure that add .env to .gitignore to avoid accidentally publishing your keys.
 
 the Harvard API key can be obtained from https://docs.google.com/forms/d/1Fe1H4nOhFkrLpaeBpLAnSrIMYvcAxnYWm0IU9a6IkFA/viewform
 The Supabase key is for your database. This is where collections and collection objects are stored. At present, this is the structure of the database:
