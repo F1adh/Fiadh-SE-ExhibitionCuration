@@ -15,6 +15,8 @@ Axios\
 Tailwind\
 Supabase
 
+## Demo Video: https://streamable.com/kr1p3c
+
 
 ## Setup instructions:
 -Install Git on your local machine, if you haven't already. https://github.com/git-guides/install-git\
