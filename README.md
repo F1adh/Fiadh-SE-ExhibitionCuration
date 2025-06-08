@@ -17,15 +17,15 @@ Supabase
 
 
 ## Setup instructions:
-Install Git on your local machine, if you haven't already. https://github.com/git-guides/install-git
-On GitHub, navigate to the main repository page and click <>code. Copy the URL in the pop-up.
-On a terminal on your machine, navigate to the folder you wish to clone the repo into.
-On the terminal, type git clone [URL_HERE] followed by enter.
-Navigate into the created folder.
+-Install Git on your local machine, if you haven't already. https://github.com/git-guides/install-git
+-On GitHub, navigate to the main repository page and click <>code. Copy the URL in the pop-up.
+-On a terminal on your machine, navigate to the folder you wish to clone the repo into.
+-On the terminal, type git clone [URL_HERE] followed by enter.
+-Navigate into the created folder.
 
 Once you have navigated into the folder, enter the following commands on your terminal:
-npm install - This will install the required dependencies to run the project
-npm run dev - This will run the project on your local machine, which you can access through your web browser with the link provided by the terminal.
+-`npm install` - This will install the required dependencies to run the project
+-`npm run dev` - This will run the project on your local machine, which you can access through your web browser with the link provided by the terminal.
 
 Please note: in order to have full functionality you will need to set up a .env file in the root directory. This is to store API keys necessary for the project:
 
