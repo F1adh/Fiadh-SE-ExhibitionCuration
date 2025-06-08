@@ -8,11 +8,11 @@ The goal of Curiate is to provide an application for researchers, students, and 
 ## Hosted Version: [Curiate](https://curiate.netlify.app/)
 
 ## Built with:
-React
-Tanstack
-TypeScript
-Axios
-Tailwind
+React\
+Tanstack\
+TypeScript\
+Axios\
+Tailwind\
 Supabase
 
 
