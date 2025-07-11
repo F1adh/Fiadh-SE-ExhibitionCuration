@@ -5,6 +5,7 @@ Curiate is a platform for users to curate personal collections of objects and ar
 
 The goal of Curiate is to provide an application for researchers, students, and enthusiasts to discover objects and artworks that interest them, and to be able to connect with others in that pursuit.
 
+Read about my experience developing this site here: https://www.linkedin.com/posts/fiadh-finnegan-312594330_reflecting-on-my-launchpad-project-activity-7349460318244274177-9TDi
 ## Hosted Version: [Curiate](https://curiate.netlify.app/)
 
 ## Built with:
